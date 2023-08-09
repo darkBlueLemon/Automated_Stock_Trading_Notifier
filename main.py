@@ -6,7 +6,6 @@ import time
 import datetime
 from TelegramBot import trigger
 
-
 def get_region_coordinates():
     global x1, y1, x2, y2, x3, y3, x4, y4
     with open('coordinates.txt', 'r') as file:
@@ -36,7 +35,7 @@ def take_screenshot_and_read_words():
 
     im.save(r"C:\Users\Blue\PycharmProjects\pythonProject\ss_name.png")
 
-    reader = easyocr.Reader(['en'])
+    reader = easyocr.Reader(['en'], gpu=False)
     result = reader.readtext('ss_name.png')
 
     words_with_non_alpha = [item[1] for item in result]
@@ -56,7 +55,7 @@ def take_screenshot_and_read_numbers():
 
     im.save(r"C:\Users\Blue\PycharmProjects\pythonProject\ss_price.png")
 
-    reader = easyocr.Reader(['en'])
+    reader = easyocr.Reader(['en'], gpu=False)
     result = reader.readtext('ss_price.png')
 
     number_list = [item[1] for item in result]
@@ -110,14 +109,12 @@ risk_percentage = 0.5
 chat_ids = [1763559069, 6273784818, 5087400987]
 get_region_coordinates()
 
+
 while True:
 
     start_time = time.time()
     current_words = take_screenshot_and_read_words()
     numbers = take_screenshot_and_read_numbers()
-    end_time = time.time()
-    time_taken = end_time - start_time
-    print(f"Time taken: {time_taken} seconds")
 
     new_words = [word for word in current_words if word not in previous_words]
     if first_screenshot_taken:
@@ -136,3 +133,7 @@ while True:
         first_screenshot_taken = True
 
     previous_words = current_words
+
+    end_time = time.time()
+    time_taken = end_time - start_time
+    print(f"Time taken: {time_taken:.2f} seconds")
