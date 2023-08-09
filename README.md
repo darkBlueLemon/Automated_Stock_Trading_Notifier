@@ -44,6 +44,5 @@ Run the program:
 
 ## Disclaimer
 
-Disclaimer
 Please note that the Automated Stock Trading Notifier is for educational and informational purposes only. Use this program responsibly and make trading decisions based on thorough research and analysis.
 
