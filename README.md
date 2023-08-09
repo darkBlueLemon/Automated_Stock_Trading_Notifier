@@ -13,27 +13,35 @@ The Automated Stock Trading Notifier is a Python program that uses Optical Chara
 - Designed to assist users in making informed trading decisions.
 
 
-## Deployment
-
-To deploy this project run
-
-```bash
-  pycharm main.py
-```
-
-
 ## Installation
 
-Install the following packages
-
+1. Clone the repository:
 ```bash
-  pyautogui, easyocr, datetime, psutil
+  git clone https://github.com/yourusername/automated-stock-notifier.git
 ```
-Also run:
+
+2. Install the following packages (inside PyCharm)
 
 ```bash
-pip install --force-reinstall -v "Pillow==9.5.0"
+  pip install pyautogui, easyocr, datetime, psutil, telebot, threading
+```
+
+```bash
+  pip install --force-reinstall -v "Pillow==9.5.0"
 ```  
+
+## Usage
+
+Run the program:
+
+```bash
+  Cursor_Position.py (once)
+```
+
+```bash
+  main.py
+```
+
 ## Disclaimer
 
 Disclaimer
