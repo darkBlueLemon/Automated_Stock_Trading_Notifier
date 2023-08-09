@@ -1,14 +1,34 @@
-import pyautogui
-import time
+from pynput.mouse import Listener
 
-def continuously_output_cursor_coordinates():
-    try:
-        while True:
-            x, y = pyautogui.position()
-            print(f"Cursor coordinates: ({x}, {y})")
-            time.sleep(0.1)  # Add a 0.5-second delay
-    except KeyboardInterrupt:
-        print("\nExiting...")
+flag = False
+temp = 0
+temp2 = 0
+
+
+def on_right_click(x, y, button, pressed):
+    global flag, temp, temp2
+    if pressed and button == button.right:
+        with open("coordinates.txt", "a") as f:
+            if not flag:
+                f.write(f"{x} {y} ")
+                flag = True
+                temp = x
+                temp2 = y
+            else:
+                f.write(f"{x-temp} {y-temp2} ")
+                print(f"Second-click at X: {x}, Y: {y}")
+                return False
+        print(f"Right-click at X: {x}, Y: {y}")
+
+
+def main():
+    with Listener(on_click=on_right_click) as listener:
+        listener.join()
+
 
 if __name__ == "__main__":
-    continuously_output_cursor_coordinates()
+    open("coordinates.txt", "w")
+    main()
+    flag = False
+    main()
+

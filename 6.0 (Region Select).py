@@ -1,10 +1,23 @@
- # https://economictimes.indiatimes.com/marketstats/pid-1004,exchange-50,sortby-percentChange,sortorder-desc,indexid-13602,company-true,indexname-Nifty%20200.cms
+# https://economictimes.indiatimes.com/marketstats/pid-1004,exchange-50,sortby-percentChange,sortorder-desc,indexid-13602,company-true,indexname-Nifty%20200.cms
 
 import pyautogui
 import easyocr
 import time
 import datetime
 from TelegramBot import trigger
+
+
+def get_region_coordinates():
+    global x1, y1, x2, y2, x3, y3, x4, y4
+    with open('coordinates.txt', 'r') as file:
+        line = file.readline().strip()
+
+    coordinates = list(map(int, line.split()))
+
+    if len(coordinates) == 8:
+        x1, y1, x2, y2, x3, y3, x4, y4 = coordinates
+    else:
+        print("Invalid number of coordinates.")
 
 
 # Handles file handling
@@ -15,9 +28,12 @@ def write_to_disk(signal):
         file.write(f"{formatted_datetime}, {signal}\n")
     file.close()
 
+
 # Takes a screenshot of the first 6 stocks and returns a list
 def take_screenshot_and_read_words():
-    im = pyautogui.screenshot(region=(600, 505, 177, 388))
+    # im = pyautogui.screenshot(region=(600, 505, 177, 388))
+    im = pyautogui.screenshot(region=(x1, y1, x2, y2))
+
     im.save(r"C:\Users\Blue\PycharmProjects\pythonProject\ss_name.png")
 
     reader = easyocr.Reader(['en'])
@@ -36,7 +52,9 @@ def take_screenshot_and_read_words():
 
 # Takes a screenshot of the first 6 stocks-prices and returns a list
 def take_screenshot_and_read_numbers():
-    im = pyautogui.screenshot(region=(1024, 505, 93, 385))
+    # im = pyautogui.screenshot(region=(1024, 505, 93, 385))
+    im = pyautogui.screenshot(region=(x3, y3, x4, y4))
+
     im.save(r"C:\Users\Blue\PycharmProjects\pythonProject\ss_price.png")
 
     reader = easyocr.Reader(['en'])
@@ -85,7 +103,7 @@ holdings = {}
 first_screenshot_taken = False
 risk_percentage = 0.5
 chat_ids = [1763559069, 6273784818, 5087400987]
-
+get_region_coordinates()
 
 while True:
 
