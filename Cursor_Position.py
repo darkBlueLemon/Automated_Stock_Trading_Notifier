@@ -15,10 +15,10 @@ def on_right_click(x, y, button, pressed):
                 temp = x
                 temp2 = y
             else:
-                f.write(f"{x-temp} {y-temp2} ")
-                print(f"Second-click at X: {x}, Y: {y}")
+                f.write(f"{x - temp} {y - temp2} ")
+                print(f"Bottom Left at X: {x}, Y: {y}")
                 return False
-        print(f"Right-click at X: {x}, Y: {y}")
+        print(f"Top Right at X: {x}, Y: {y}")
 
 
 def main():
@@ -27,8 +27,8 @@ def main():
 
 
 if __name__ == "__main__":
+    print("Right click to capture coordinates\nOnce for the Stock Names and once for Change%\n1. Top Left\n2. Bottom Right")
     open("coordinates.txt", "w")
     main()
     flag = False
     main()
-
